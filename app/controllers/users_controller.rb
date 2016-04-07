@@ -13,8 +13,10 @@ class UsersController < ApplicationController
   	@user = User.new(user_params)
   		if @user.save
   			flash[:success] = "Welcome to the Sampling"
-  			redirect_to @user
+        log_in(@user)
+        redirect_to @user
   		else
+  			flash[:danger] = "Fix your submission!"
   			render 'new'
   		end
   end
