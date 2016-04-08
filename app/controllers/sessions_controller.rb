@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       # remember user
-      redirect_back_or user, :notice => "Logged in as #{current_user.name}"
+      redirect_back_or(user)
+      flash[:notice] = "Logged in as #{current_user.name}"
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
