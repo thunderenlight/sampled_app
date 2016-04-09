@@ -20,9 +20,10 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   		if @user.save
-  			flash[:success] = "Welcome to the Sampling"
-        log_in(@user)
-        redirect_to @user
+        @user.send_activation_email
+        flash[:info] = "Please check your email to activate account."
+        # log_in(@user)
+        redirect_to root_url
   		else
   			flash[:danger] = "Fix your submission!"
   			render 'new'
@@ -33,9 +34,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:sucess] = "Profile updated"
+      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render 'edit'
@@ -65,7 +66,7 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+    redirect_to(root_url) unless current_user?(@user)
   end
 
   def admin_user
