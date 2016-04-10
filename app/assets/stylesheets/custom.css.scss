@@ -4,6 +4,12 @@
 
 @gray-light: #777;
 $gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
 /* universal */
 
 
@@ -23,7 +29,7 @@ textarea {
 .center {
 	text-align: center;
 	h1 {
-		margin-bottom: 10px;
+		margin-bottom: 60px;
 	}
 
 }
@@ -91,7 +97,7 @@ p {
 
 aside {
 	section.user_info {
-		margin-top: 2-px;
+		margin-top: 20px;
 	}
 	section {
 		padding: 10px 0;
